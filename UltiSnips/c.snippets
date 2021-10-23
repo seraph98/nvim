@@ -1,0 +1,21 @@
+snippet cout "std cout" b
+std::cout << $1 << std::endl;
+endsnippet
+
+snippet cin "std cin" b
+std::cin >> $1;
+endsnippet
+
+snippet forr "for range" b
+for (${1:auto} ${2:x} : ${3:ls}) {
+	$4
+}
+endsnippet
+
+snippet name "using namespace " b
+using namespace $1;
+endsnippet
+
+snippet inc "include " b
+#include<${1:iostream}>
+endsnippet

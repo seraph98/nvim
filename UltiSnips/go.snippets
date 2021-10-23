@@ -1,0 +1,38 @@
+snippet bli "bytedance logs info" b
+logs.CtxInfo(${1:ctx}, $2)
+endsnippet
+
+snippet ble "bytedance logs error" b
+logs.CtxError(${1:ctx}, $2)
+endsnippet
+
+snippet blw "bytedance logs warn" b
+logs.CtxWarn(${1:ctx}, $2)
+endsnippet
+
+
+
+snippet ctx= "context.Background()" b
+ctx := context.Background()
+endsnippet
+
+snippet elog "output error log" b
+if err != nil {
+	logs.CtxError(${1:ctx}, $2)
+}
+endsnippet
+
+
+snippet init "init func" b
+func init() {
+	$1
+}
+endsnippet
+
+snippet errl "err log" b
+if err != nil {
+	logs.CtxError(ctx, " $1, err=%v", err)
+}
+endsnippet
+
+
