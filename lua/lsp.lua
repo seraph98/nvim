@@ -44,7 +44,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('n', '<leader>k', '<cmd>lua toggle_document_highlight()<CR>', opts)
   
-  vim.api.nvim_command('au BufWritePre <buffer> lua vim.lsp.buf.formatting()')
+  vim.api.nvim_command('autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 100)')
+  --[[
+     [vim.api.nvim_command('au BufWritePre <buffer> lua vim.lsp.buf.formatting()')
+	 ]]
 end
 
 -- Add additional capabilities supported by nvim-cmp
@@ -64,17 +67,54 @@ for _, lsp in ipairs(servers) do
 end
 
 
+local util = require('lspconfig/util')
+local gopath = os.getenv("GOPATH")
+if gopath == nil then
+  gopath = ""
+end
+local gopathmod = gopath..'/pkg/mod'
+
+nvim_lsp.gopls.setup {
+  root_dir = function(fname)
+    local fullpath = vim.fn.expand(fname, ':p')
+    if string.find(fullpath, gopathmod) and lastRootPath ~= nil then
+        return lastRootPath
+    end
+    lastRootPath = util.root_pattern("go.mod", ".git")(fname)
+    return lastRootPath
+  end,
+  }
+
 nvim_lsp.gopls.setup{
-  cmd = {"gopls", "serve"},
+  cmd = {"gopls", "--remote=auto"},
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = { "go", "gomod" },
-  root_dir = nvim_lsp.util.root_pattern("go.mod", ".git", ".gitignore") ,
-  settings = {
-	  gopls = {
-		  allowModfileModifications = true,
-	  }
-  }
+  root_dir = function(fname)
+    local fullpath = vim.fn.expand(fname, ':p')
+    if string.find(fullpath, gopathmod) and lastRootPath ~= nil then
+        return lastRootPath
+    end
+    lastRootPath = util.root_pattern("go.mod", ".git", ".gitignore")(fname)
+    return lastRootPath
+  end,
+  --[[
+     [root_dir = nvim_lsp.util.root_pattern("go.mod", ".git", ".gitignore") ,
+	 ]]
+  init_options = {
+		allowModfileModifications = true,
+		usePlaceholders = true,
+		experimentalWorkspaceModule= true,
+  },
+  --[[
+     [settings = {
+	 [  gopls = {
+	 [      allowModfileModifications = true,
+	 [      usePlaceholders = true,
+	 [       experimentalWorkspaceModule= true,
+	 [  }
+     [}
+	 ]]
 }
 
 -- Set completeopt to have a better completion experience
@@ -146,3 +186,11 @@ function toggle_document_highlight()
 	end
 end
 
+
+local au = require('au')
+au.BufEnter = {
+	'*.go',
+	function()
+		require('lsp.go')
+	end,
+}

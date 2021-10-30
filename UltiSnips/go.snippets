@@ -10,8 +10,6 @@ snippet blw "bytedance logs warn" b
 logs.CtxWarn(${1:ctx}, $2)
 endsnippet
 
-
-
 snippet ctx= "context.Background()" b
 ctx := context.Background()
 endsnippet
@@ -35,4 +33,6 @@ if err != nil {
 }
 endsnippet
 
-
+snippet lf "logs.Printf" b
+logs.Printf("$1=%v", $1)
+endsnippet

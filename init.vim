@@ -324,6 +324,8 @@ let g:NERDTreeGitStatusShowIgnored = 1
 
 nmap <Leader>test :call QuickTest()<CR>
 
+nmap <Leader>bench :call QuickBench()<CR>
+
 nmap <Leader>debug :call QuickDebug()<CR>
 
 nmap <Leader>run :call QuickRun()<CR>
@@ -340,6 +342,23 @@ function QuickTest()
 		let param = "^".func_name."$ ".path
 		"execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ^".func_name."$ %:h/*.go |sed_color"
 		execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ".param." |sed_color"
+	endif
+
+endfunction
+
+function QuickBench()
+	let func_name = cfi#format("%s", "")
+	if &filetype == "go"
+		try
+			let path = split(expand("%:p:h"), "go/src/")[1]
+			let path = join(split(path, "/")[3:], "/")
+			let path = "./".path
+		catch
+			echo "wrong path:".expand("%:p:h")
+		endtry
+		let param = split(func_name, "Benchmark")[0]
+		"execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ^".func_name."$ %:h/*.go |sed_color"
+		execute "tabnew | term go test -bench=".param." ".path." -run=".param." |sed_color"
 	endif
 
 endfunction
