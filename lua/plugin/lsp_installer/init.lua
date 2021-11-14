@@ -1,4 +1,7 @@
 local common = require("plugin/lsp_installer.common")
+local file_util = require("util.file")
+local home = os.getenv("HOME")
+local base = home.."/.config/nvim/lua/plugin/lsp_installer/"
 
 local use = require('packer').use
 require('packer').startup(function()
@@ -22,9 +25,11 @@ vim.o.completeopt = 'menuone,noselect'
 lsp_installer.on_server_ready(function(server)
 	local opts = {}
 	-- (optional) Customize the options passed to the server
-	local config = require("plugin/lsp_installer."..server.name)
-	if config ~= nil  then
-		opts = config
+	local module = "plugin/lsp_installer."..server.name
+	local path = base..server.name..".lua"
+		vim.api.nvim_command("echom '"..path.."'")
+	if file_util.file_exists(path) then
+		opts = require(module)
 	end
 
 	opts.on_attach = common.on_attach
