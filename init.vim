@@ -2,6 +2,9 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
 set termencoding=utf-8
 set encoding=utf-8
+
+" 不换行
+"set nowrap
 "set clipboard=unnamed
 set conceallevel=1
 " 设置 vimrc 修改保存后立刻生效，不用在重新打开
@@ -75,6 +78,9 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 
 
+" lsp installer
+Plug 'williamboman/nvim-lsp-installer'
+
 " 语义解析
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
@@ -139,6 +145,10 @@ Plug 'tpope/vim-fugitive'
 
 " 找到函数name
 Plug 'tyru/current-func-info.vim'
+
+
+" 通知配置
+Plug 'rcarriga/nvim-notify'
 
 call plug#end()
 
@@ -303,6 +313,7 @@ let g:tagbar_wrap = 1
 
 
 
+
 "==============================================================================
 "  nerdtree-git-plugin 插件
 "==============================================================================
@@ -341,7 +352,9 @@ function QuickTest()
 		endtry
 		let param = "^".func_name."$ ".path
 		"execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ^".func_name."$ %:h/*.go |sed_color"
-		execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ".param." |sed_color"
+		let exe = "tabnew | term go test -gcflags=all=-l -count=1 -v -run ".param." |sed_color"
+		execute "echom 'go test -gcflags=all=-l -count=1 -v -run ".param."'"
+		execute exe
 	endif
 
 endfunction
@@ -366,8 +379,7 @@ endfunction
 function QuickRun()
 	let file_name = expand('%:t')
 	if &filetype == "cpp"
-		execute "tabnew | term gcc ".file_name." -lstdc++ -o atemp.out && ./atemp.out"
-		:silent !rm ./atemp.out
+		execute "tabnew | term gcc ".file_name." -lstdc++ -o atemp.out && ./atemp.out && rm ./atemp.out"
 	else
 		echom "un supported file type"
 	endif

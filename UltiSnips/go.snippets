@@ -33,6 +33,12 @@ if err != nil {
 }
 endsnippet
 
+snippet errt "err fatal" b
+if err != nil {
+	t.Fatal(err)
+}
+endsnippet
+
 snippet lf "logs.Printf" b
-logs.Printf("$1=%v", $1)
+log.Printf("$1=%+v", $1)
 endsnippet
