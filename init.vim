@@ -150,6 +150,7 @@ Plug 'tyru/current-func-info.vim'
 " 通知配置
 Plug 'rcarriga/nvim-notify'
 
+
 call plug#end()
 
 

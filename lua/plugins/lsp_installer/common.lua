@@ -36,9 +36,7 @@ M.on_attach = function(client, bufnr)
 	[vim.api.nvim_command('autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 100)')
 	]]
 	vim.api.nvim_command('au BufWritePre <buffer> lua vim.lsp.buf.formatting()')
-	require("notify")(client.name.."client has attched server successfully!", "info", {
-		timeout = 100,
-	})
+	require("notify")(client.name.."client has attched server successfully!")
 end
 
 
