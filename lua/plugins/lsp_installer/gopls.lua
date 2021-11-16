@@ -53,12 +53,14 @@ function GoImports(timeout_ms)
 	end
 end
 
-local au = require('au')
-au.BufEnter = {
-	'*.go',
-	function()
-		vim.api.nvim_command('autocmd BufWritePre * lua GoImports(1000)')
-	end,
-}
+--[[
+   [local au = require('au')
+   [au.BufEnter = {
+   [    '*.go',
+   [    function()
+   [        vim.api.nvim_command('autocmd BufWritePre * lua GoImports(1000)')
+   [    end,
+   [}
+   ]]
 return opts
 
