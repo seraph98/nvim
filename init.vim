@@ -331,7 +331,7 @@ let g:NERDTreeIndicatorMapCustomm = {
 			\ "Unknown"   : "?"
 			\ }
 
-let g:NERDTreeGitStatusShowIgnored = 1
+let g:NERDTreeGitStatusShowIgnored = 0
 
 
 nmap <Leader>test :call QuickTest()<CR>
