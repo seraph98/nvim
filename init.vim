@@ -1,5 +1,8 @@
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
+" search case insensitive
+set noignorecase
+
 set termencoding=utf-8
 set encoding=utf-8
 
@@ -150,6 +153,13 @@ Plug 'tyru/current-func-info.vim'
 " 通知配置
 Plug 'rcarriga/nvim-notify'
 
+
+" java 插件
+Plug 'mfussenegger/nvim-jdtls'
+
+
+" Go test 自动生成
+Plug 'buoto/gotests-vim'
 
 call plug#end()
 
@@ -342,6 +352,17 @@ nmap <Leader>debug :call QuickDebug()<CR>
 
 nmap <Leader>run :call QuickRun()<CR>
 
+nmap <Leader>gtest :call GenTest()<CR>
+
+
+function GenTest() 
+	let func_name = cfi#format("%s", "")
+	if &filetype == "go"
+		:call system('gotests -all -w '.expand("%:p"))
+	endif
+endfunction
+
+
 
 function QuickTest()
 	let func_name = cfi#format("%s", "")
@@ -353,7 +374,7 @@ function QuickTest()
 		endtry
 		let param = "^".func_name."$ ".path
 		"execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ^".func_name."$ %:h/*.go |sed_color"
-		let exe = "tabnew | term go test -gcflags=all=-l -count=1 -v -run ".param." |sed_color"
+		let exe = "tabnew |term go test -gcflags=all=-l -count=1 -v -run ".param." |sed_color"
 		execute "echom 'go test -gcflags=all=-l -count=1 -v -run ".param."'"
 		execute exe
 	endif
@@ -381,6 +402,8 @@ function QuickRun()
 	let file_name = expand('%:t')
 	if &filetype == "cpp"
 		execute "tabnew | term gcc ".file_name." -lstdc++ -o atemp.out && ./atemp.out && rm ./atemp.out"
+	elseif &filetype == "sh"
+		execute "tabnew | term ".expand("%:p")
 	else
 		echom "un supported file type"
 	endif
@@ -483,3 +506,5 @@ EOF
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+set shell=/usr/bin/zsh
