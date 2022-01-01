@@ -18,7 +18,6 @@ local opts = {
 	end,
 	init_options = {
 		allowModfileModifications = true,
-		experimentalWorkspaceModule= true,
 	},
 }
 
