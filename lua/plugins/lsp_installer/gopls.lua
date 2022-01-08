@@ -16,13 +16,14 @@ local opts = {
 		LastRootPath = util.root_pattern("go.mod", ".git", ".gitignore")(fname)
 		return LastRootPath
 	end,
-	init_options = {
-		--[[
-		   [allowModfileModifications = true,
-		   [experimentalWorkspaceModule= true,
-		   ]]
-	},
+	--[[
+	   [init_options = {
+	   [    allowModfileModifications = true,
+	   [    experimentalWorkspaceModule= true,
+	   [},
+	   ]]
 }
+
 
 function GoImports(timeout_ms)
 	local context = { only = { "source.organizeImports" } }
