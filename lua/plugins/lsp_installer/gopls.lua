@@ -17,8 +17,10 @@ local opts = {
 		return LastRootPath
 	end,
 	init_options = {
-		allowModfileModifications = true,
-		experimentalWorkspaceModule= true,
+		--[[
+		   [allowModfileModifications = true,
+		   [experimentalWorkspaceModule= true,
+		   ]]
 	},
 }
 
