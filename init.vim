@@ -95,6 +95,8 @@ Plug 'jistr/vim-nerdtree-tabs'
 "
 " " 可以在导航目录中看到 git 版本信息
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'airblade/vim-gitgutter'
 "
 " scroll smoothly
 Plug 'psliwka/vim-smoothie'
@@ -404,6 +406,8 @@ function QuickRun()
 		execute "tabnew | term gcc ".file_name." -lstdc++ -o atemp.out && ./atemp.out && rm ./atemp.out"
 	elseif &filetype == "sh"
 		execute "tabnew | term ".expand("%:p")
+	elseif &filetype == "go"
+		execute  "tabnew | term go run -gcflags=all=-l ".expand("%:p")
 	else
 		echom "un supported file type"
 	endif
@@ -508,3 +512,9 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 set shell=/usr/bin/zsh
+
+let NERDTreeMapToggleZoom="<Leader>l"
+
+
+nmap gn <Plug>(GitGutterNextHunk)
+nmap gm <Plug>(GitGutterPrevHunk)
