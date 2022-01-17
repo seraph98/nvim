@@ -1,7 +1,7 @@
 require('highlights')
-require('plugins/init')
 require('keymappings')
 require('plugins')
+require('plugins/init')
 
-vim.api.nvim_set_keymap('n', '<leader>gim', [[<cmd>lua require'telescope'.extensions.goimpl.goimpl{}<CR>]], {noremap=true, silent=true})
+vim.api.nvim_set_keymap('n', '<leader>im', [[<cmd>lua require'telescope'.extensions.goimpl.goimpl{}<CR>]], {noremap=true, silent=true})
 
