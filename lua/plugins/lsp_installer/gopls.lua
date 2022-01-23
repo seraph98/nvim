@@ -16,12 +16,11 @@ local opts = {
 		LastRootPath = util.root_pattern("go.mod", ".git", ".gitignore")(fname)
 		return LastRootPath
 	end,
-	--[[
-	   [init_options = {
-	   [    allowModfileModifications = true,
-	   [    experimentalWorkspaceModule= true,
-	   [},
-	   ]]
+	settings = {
+		gopls =  {
+			buildFlags={"-tags=prod"}
+		}
+	}
 }
 
 

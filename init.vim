@@ -163,6 +163,10 @@ Plug 'mfussenegger/nvim-jdtls'
 " Go test 自动生成
 Plug 'buoto/gotests-vim'
 
+
+" thrift 语法高亮
+Plug 'solarnz/thrift.vim'
+
 call plug#end()
 
 
@@ -395,7 +399,7 @@ function QuickBench()
 		endtry
 		let param = split(func_name, "Benchmark")[0]
 		"execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ^".func_name."$ %:h/*.go |sed_color"
-		execute "tabnew | term go test -bench=".param." ".path." -run=".param." |sed_color"
+		execute "tabnew | term go test -bench=".param." ".path." -run=".param." -benchtime=7s |sed_color"
 	endif
 
 endfunction
