@@ -380,8 +380,8 @@ function QuickTest()
 		endtry
 		let param = "^".func_name."$ ".path
 		"execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ^".func_name."$ %:h/*.go |sed_color"
-		let exe = "tabnew |term go test -gcflags=all=-l -count=1 -v -run ".param." |sed_color"
-		execute "echom 'go test -gcflags=all=-l -count=1 -v -run ".param."'"
+		let exe = "tabnew |term go test -tags=prod -gcflags=all=-l -count=1 -v -run ".param." |sed_color"
+		"execute "echom 'go test -gcflags=all=-l -count=1 -v -run ".param."'"
 		execute exe
 	endif
 
@@ -399,7 +399,7 @@ function QuickBench()
 		endtry
 		let param = split(func_name, "Benchmark")[0]
 		"execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ^".func_name."$ %:h/*.go |sed_color"
-		execute "tabnew | term go test -bench=".param." ".path." -run=".param." -benchtime=7s |sed_color"
+		execute "tabnew | term go test -tags=prod -bench=".param." ".path." -run=".param." -benchtime=7s |sed_color"
 	endif
 
 endfunction
@@ -411,7 +411,7 @@ function QuickRun()
 	elseif &filetype == "sh"
 		execute "tabnew | term ".expand("%:p")
 	elseif &filetype == "go"
-		execute  "tabnew | term go run -gcflags=all=-l ".expand("%:p")
+		execute  "tabnew | term go run -gcflags=all=-l -tags=prod ".expand("%:p:h")
 	else
 		echom "un supported file type"
 	endif
