@@ -412,8 +412,10 @@ function QuickRun()
 		execute "tabnew | term ".expand("%:p")
 	elseif &filetype == "go"
 		execute  "tabnew | term go run -gcflags=all=-l -tags=prod ".expand("%:p:h")
+	elseif &filetype == "javascript"
+		execute  "tabnew | term node ".expand("%:p")
 	else
-		echom "un supported file type"
+		echom "un supported file type: ".&filetype
 	endif
 
 endfunction
