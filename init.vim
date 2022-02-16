@@ -517,7 +517,7 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-set shell=/usr/bin/zsh
+set shell=zsh
 
 let NERDTreeMapToggleZoom="<Leader>l"
 
