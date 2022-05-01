@@ -160,6 +160,8 @@ Plug 'rcarriga/nvim-notify'
 Plug 'mfussenegger/nvim-jdtls'
 
 
+Plug 'ray-x/go.nvim'
+
 " Go test 自动生成
 Plug 'buoto/gotests-vim'
 

@@ -9,6 +9,7 @@ require('plugins/init')
 vim.cmd [[packadd packer.nvim]]
 vim.api.nvim_set_keymap('n', '<leader>im', [[<cmd>lua require'telescope'.extensions.goimpl.goimpl{}<CR>]], {noremap=true, silent=true})
 
+
 return require('packer').startup(function(use)
 	  -- Packer can manage itself
     use 'wbthomason/packer.nvim'

@@ -5,6 +5,9 @@ if gopath == nil then
 end
 local gopathmod = gopath..'/pkg/mod'
 
+
+
+require('go').setup()
 local opts = {
 	cmd = {"gopls", "--remote=auto"},
 	filetypes = { "go", "gomod" },
