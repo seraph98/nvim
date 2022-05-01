@@ -414,8 +414,10 @@ function QuickRun()
 		execute "tabnew | term ".expand("%:p")
 	elseif &filetype == "go"
 		execute  "tabnew | term go run -gcflags=all=-l -tags=prod ".expand("%:p:h")
+	elseif &filetype == "javascript"
+		execute  "tabnew | term node ".expand("%:p")
 	else
-		echom "un supported file type"
+		echom "un supported file type: ".&filetype
 	endif
 
 endfunction
@@ -517,7 +519,7 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-set shell=/usr/bin/zsh
+set shell=zsh
 
 let NERDTreeMapToggleZoom="<Leader>l"
 
