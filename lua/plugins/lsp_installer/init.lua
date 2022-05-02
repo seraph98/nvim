@@ -1,15 +1,15 @@
 local common = require("plugins/lsp_installer.common")
 local file_util = require("util.file")
 local home = os.getenv("HOME")
-local base = home.."/.config/nvim/lua/plugins/lsp_installer/"
+local base = home .. "/.config/nvim/lua/plugins/lsp_installer/"
 
 local use = require('packer').use
 require('packer').startup(function()
-  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+	use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+	use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+	use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+	use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+	use 'L3MON4D3/LuaSnip' -- Snippets plugin
 end)
 
 local lsp_installer = require("nvim-lsp-installer")
@@ -25,8 +25,8 @@ vim.o.completeopt = 'menuone,noselect'
 lsp_installer.on_server_ready(function(server)
 	local opts = {}
 	-- (optional) Customize the options passed to the server
-	local module = "plugins/lsp_installer."..server.name
-	local path = base..server.name..".lua"
+	local module = "plugins/lsp_installer." .. server.name
+	local path = base .. server.name .. ".lua"
 	if file_util.file_exists(path) then
 		opts = require(module)
 	end
@@ -43,25 +43,35 @@ end)
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
+	snippet = {
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body)
+		end,
+	},
+	mapping = {
+		['<CR>'] = cmp.mapping.confirm {
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		},
+		['<Up>'] = function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			else
+				fallback()
+			end
+		end,
+		['<Down>'] = function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			else
+				fallback()
+			end
+		end
+	},
+	sources = {
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+	},
 }
 
 
@@ -74,7 +84,7 @@ local document_hight_toggle = 0
 
 function toggle_document_highlight()
 	if document_hight_toggle == 0 then
-  		vim.api.nvim_command('lua vim.lsp.buf.document_highlight()')
+		vim.api.nvim_command('lua vim.lsp.buf.document_highlight()')
 		document_hight_toggle = 1
 	else
 		vim.api.nvim_command('lua vim.lsp.buf.clear_references()')
