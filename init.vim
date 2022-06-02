@@ -490,7 +490,10 @@ set re=2
 
 " quick list 跳转
 nnoremap <C-n> :cn<CR>
-nnoremap <C-m> :cp<CR>
+" thanks for the answer:
+" https://vi.stackexchange.com/questions/14379/separate-c-m-and-enter 
+" should press c+v and then c+m to give an actual key
+nnoremap  :cp<CR>
 nnoremap <Leader>a :cclose<CR>
 
 "==============================================================================
