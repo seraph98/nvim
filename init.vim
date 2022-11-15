@@ -382,7 +382,7 @@ function QuickTest()
 		endtry
 		let param = "^".func_name."$ ".path
 		"execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ^".func_name."$ %:h/*.go |sed_color"
-		let exe = "tabnew |term go test -tags=prod -gcflags=all=-l -count=1 -v -run ".param." |sed_color"
+		let exe = "tabnew |term go test -tags=prod -gcflags=\"all=-l -N\" -count=1 -timeout 1000m -v -run ".param." |sed_color"
 		"execute "echom 'go test -gcflags=all=-l -count=1 -v -run ".param."'"
 		execute exe
 	endif

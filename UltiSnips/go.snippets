@@ -23,7 +23,7 @@ endsnippet
 
 snippet err "err log" b
 if err != nil {
-	logs.CtxError(ctx, "`!v cfi#format("%s", "")` --> `!p
+	logs.CtxError(ctx, "[`!v cfi#format("%s", "")`] `!p
 if not snip.c:
 	no, _ =vim.current.window.cursor
 i = 1
@@ -35,7 +35,7 @@ while "err" not in line:
 	snip.rv=line+snip.rv
 	line=vim.current.line
 snip.rv=line+snip.rv
-snip.rv=snip.rv.strip().replace("\"", "\\\"").replace(" ", "").replace("\t", "").replace("\n","")
+snip.rv=snip.rv.strip().replace("\"", "\\\"").replace(" ", "").replace("\t", "").replace("\n","").split("=")[1]
 	` , err=%v", err)
 	return err
 }
@@ -44,7 +44,21 @@ endsnippet
 
 snippet warn "warn log" b
 if err != nil {
-	logs.CtxWarn(ctx, "`!v cfi#format("%s", "")` --> `!v getline(line('.')-3)` , err=%v", err)
+	logs.CtxWarn(ctx, "[`!v cfi#format("%s", "")`] `!p
+if not snip.c:
+	no, _ =vim.current.window.cursor
+i = 1
+vim.current.window.cursor = (no-i, 0)
+line=vim.current.line
+while "err" not in line:
+	i+=1
+	vim.current.window.cursor = (no-i, 0)
+	snip.rv=line+snip.rv
+	line=vim.current.line
+snip.rv=line+snip.rv
+snip.rv=snip.rv.strip().replace("\"", "\\\"").replace(" ", "").replace("\t", "").replace("\n","").split("=")[1]
+	` , err=%v", err)
+	return err
 }
 endsnippet
 
