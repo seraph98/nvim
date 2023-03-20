@@ -1,7 +1,10 @@
+let g:AutoPairsMapCR = 0 " https://github.com/jiangmiao/auto-pairs/issues/34
+
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
 " search case insensitive
 set noignorecase
+
 
 set termencoding=utf-8
 set encoding=utf-8
@@ -82,7 +85,7 @@ Plug 'L3MON4D3/LuaSnip'
 
 
 " lsp installer
-Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason.nvim'
 
 " 语义解析
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -102,7 +105,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'psliwka/vim-smoothie'
 Plug 'Xuyuanp/nerdtree-git-plugin' " show git info
 Plug 'ryanoasis/vim-devicons' "Adds filetype-specific icons to NERDTree files and folders
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "Adds syntax highlighting to NERDTree based on filetype.
+Plug 'johnstef99/vim-nerdtree-syntax-highlight' "Adds syntax highlighting to NERDTree based on filetype.
 
 
 " " 下面两个插件要配合使用，可以自动生成代码块
@@ -132,7 +135,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'tyru/current-func-info.vim'
 
 " neovim build-in lsp
-Plug 'neovim/nvim-lspconfig'
 
 " " 可以快速对齐的插件
 Plug 'junegunn/vim-easy-align'
@@ -479,7 +481,8 @@ function QuickCopy() range
 	":!(echo $TEMP_CLIP | it2copy)
 	let $TEMP_CLIP = GetVisualSelection(visualmode())
 	let @" = $TEMP_CLIP
-	:OSCYank
+	echo "..."
+	:OSCYankVisual
 	":!(echo $TEMP_CLIP | it2copy)
 endfunction
 
