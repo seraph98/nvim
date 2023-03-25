@@ -1,4 +1,4 @@
-let g:AutoPairsMapCR = 0 " https://github.com/jiangmiao/auto-pairs/issues/34
+" let g:AutoPairsMapCR = 0 " https://github.com/jiangmiao/auto-pairs/issues/34
 
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
@@ -19,8 +19,6 @@ set conceallevel=1
 " 解决插入模式下delete/backspce键失效问题
 set backspace=2
 "set scroll=5
-" 打开鼠标功能
-" set mouse=a
 " 关闭兼容模式
 set nocompatible
 
@@ -532,3 +530,5 @@ let NERDTreeMapToggleZoom="<Leader>l"
 
 nmap gn <Plug>(GitGutterNextHunk)
 nmap gm <Plug>(GitGutterPrevHunk)
+
+set mouse=r
