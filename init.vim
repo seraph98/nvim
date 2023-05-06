@@ -1,5 +1,3 @@
-" let g:AutoPairsMapCR = 0 " https://github.com/jiangmiao/auto-pairs/issues/34
-
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
 " search case insensitive
@@ -136,9 +134,6 @@ Plug 'tyru/current-func-info.vim'
 
 " " 可以快速对齐的插件
 Plug 'junegunn/vim-easy-align'
-
-" " 自动补全括号的插件，包括小括号，中括号，以及花括号
-Plug 'jiangmiao/auto-pairs'
 
 " ctags 插件
 Plug 'ludovicchabant/vim-gutentags'
@@ -531,4 +526,4 @@ let NERDTreeMapToggleZoom="<Leader>l"
 nmap gn <Plug>(GitGutterNextHunk)
 nmap gm <Plug>(GitGutterPrevHunk)
 
-set mouse=r
+set mouse=

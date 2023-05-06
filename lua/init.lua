@@ -1,6 +1,7 @@
 require('highlights')
 require('keymappings')
 require('plugins/init')
+
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
@@ -35,9 +36,24 @@ return require('packer').startup(function(use)
 	}
 
 	use {
-		"windwp/nvim-autopairs"
+		"jackMort/ChatGPT.nvim",
+		config = function()
+			require("chatgpt").setup()
+		end,
+		requires = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim"
+		}
 	}
 
+	use {
+		"windwp/nvim-autopairs",
+		config = function() require("nvim-autopairs").setup {} end
+	}
+
+
+	use("quangnguyen30192/cmp-nvim-ultisnips")
 
 	use({
 		"hrsh7th/nvim-cmp",
