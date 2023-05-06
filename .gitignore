@@ -3,3 +3,4 @@ plugged
 tags
 tags.lock
 tags.temp
+plugin/packer_compiled.lua

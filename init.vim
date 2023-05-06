@@ -411,6 +411,8 @@ function QuickRun()
 		execute  "tabnew | term go run -gcflags=all=-l -tags=prod ".expand("%:p:h")
 	elseif &filetype == "javascript"
 		execute  "tabnew | term node ".expand("%:p")
+	elseif &filetype == "python"
+		execute "tabnew | term python3 ".expand("%:p")
 	else
 		echom "un supported file type: ".&filetype
 	endif

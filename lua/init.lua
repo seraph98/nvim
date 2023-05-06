@@ -55,6 +55,8 @@ return require('packer').startup(function(use)
 
 	use("quangnguyen30192/cmp-nvim-ultisnips")
 
+	use("quangnguyen30192/cmp-nvim-ultisnips")
+
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
