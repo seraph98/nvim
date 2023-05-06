@@ -1,3 +1,6 @@
 require('plugins/notification')
-require('plugins/lsp_installer')
-require('plugins/telescope')
+--[[
+   [require('plugins/lsp_installer')
+   ]]
+require('plugins/mason')
+-- require('plugins/telescope')

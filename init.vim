@@ -3,6 +3,7 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 " search case insensitive
 set noignorecase
 
+
 set termencoding=utf-8
 set encoding=utf-8
 
@@ -16,8 +17,6 @@ set conceallevel=1
 " 解决插入模式下delete/backspce键失效问题
 set backspace=2
 "set scroll=5
-" 打开鼠标功能
-" set mouse=a
 " 关闭兼容模式
 set nocompatible
 
@@ -82,7 +81,7 @@ Plug 'L3MON4D3/LuaSnip'
 
 
 " lsp installer
-Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason.nvim'
 
 " 语义解析
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -102,7 +101,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'psliwka/vim-smoothie'
 Plug 'Xuyuanp/nerdtree-git-plugin' " show git info
 Plug 'ryanoasis/vim-devicons' "Adds filetype-specific icons to NERDTree files and folders
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "Adds syntax highlighting to NERDTree based on filetype.
+Plug 'johnstef99/vim-nerdtree-syntax-highlight' "Adds syntax highlighting to NERDTree based on filetype.
 
 
 " " 下面两个插件要配合使用，可以自动生成代码块
@@ -132,13 +131,9 @@ Plug 'preservim/nerdcommenter'
 Plug 'tyru/current-func-info.vim'
 
 " neovim build-in lsp
-Plug 'neovim/nvim-lspconfig'
 
 " " 可以快速对齐的插件
 Plug 'junegunn/vim-easy-align'
-
-" " 自动补全括号的插件，包括小括号，中括号，以及花括号
-Plug 'jiangmiao/auto-pairs'
 
 " ctags 插件
 Plug 'ludovicchabant/vim-gutentags'
@@ -382,7 +377,7 @@ function QuickTest()
 		endtry
 		let param = "^".func_name."$ ".path
 		"execute "tabnew | term go test -gcflags=all=-l -count=1 -v -run ^".func_name."$ %:h/*.go |sed_color"
-		let exe = "tabnew |term go test -timeout=10h -tags=prod -gcflags=all=-l -count=1 -v -run ".param." |sed_color"
+		let exe = "tabnew |term go test -tags=prod -gcflags=\"all=-l -N\" -count=1 -timeout 1000m -v -run ".param." |sed_color"
 		"execute "echom 'go test -gcflags=all=-l -count=1 -v -run ".param."'"
 		execute exe
 	endif
@@ -481,7 +476,8 @@ function QuickCopy() range
 	":!(echo $TEMP_CLIP | it2copy)
 	let $TEMP_CLIP = GetVisualSelection(visualmode())
 	let @" = $TEMP_CLIP
-	:OSCYank
+	echo "..."
+	:OSCYankVisual
 	":!(echo $TEMP_CLIP | it2copy)
 endfunction
 
@@ -531,3 +527,5 @@ let NERDTreeMapToggleZoom="<Leader>l"
 
 nmap gn <Plug>(GitGutterNextHunk)
 nmap gm <Plug>(GitGutterPrevHunk)
+
+set mouse=r
