@@ -84,8 +84,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set('n', '<space>f', function()
 			vim.lsp.buf.format { async = true }
 		end, opts)
-
-		vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+		vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 	end,
 })
 

@@ -1,7 +1,3 @@
-require('highlights')
-require('keymappings')
-require('plugins/init')
-
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
@@ -12,7 +8,7 @@ vim.cmd [[packadd packer.nvim]]
 -- network issue: https://github.com/nvim-treesitter/nvim-treesitter/issues/3232
 require("nvim-treesitter.install").prefer_git = true
 
-return require('packer').startup(function(use)
+require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 	use "williamboman/mason.nvim"
@@ -33,18 +29,6 @@ return require('packer').startup(function(use)
 		config = function()
 			require 'telescope'.load_extension 'goimpl'
 		end,
-	}
-
-	use {
-		"jackMort/ChatGPT.nvim",
-		config = function()
-			require("chatgpt").setup()
-		end,
-		requires = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim"
-		}
 	}
 
 	use {
@@ -99,3 +83,7 @@ return require('packer').startup(function(use)
 		end,
 	})
 end)
+require('highlights')
+require('keymappings')
+require('plugins/init')
+return
