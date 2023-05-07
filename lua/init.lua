@@ -11,6 +11,7 @@ require("nvim-treesitter.install").prefer_git = true
 require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
+	use '~/.local/share/nvim/site/pack/packer/start/packer.nvim'
 	use "williamboman/mason.nvim"
 
 	use {
@@ -36,8 +37,6 @@ require('packer').startup(function(use)
 		config = function() require("nvim-autopairs").setup {} end
 	}
 
-
-	use("quangnguyen30192/cmp-nvim-ultisnips")
 
 	use("quangnguyen30192/cmp-nvim-ultisnips")
 
