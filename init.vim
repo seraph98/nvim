@@ -355,6 +355,8 @@ nmap <Leader>debug :call QuickDebug()<CR>
 
 nmap <Leader>run :call QuickRun()<CR>
 
+nmap <Leader>sol :call QuickSOL()<CR>
+
 nmap <Leader>gtest :call GenTest()<CR>
 
 
@@ -413,6 +415,19 @@ function QuickRun()
 		execute  "tabnew | term node ".expand("%:p")
 	elseif &filetype == "python"
 		execute "tabnew | term python3 ".expand("%:p")
+	elseif &filetype == "rust"
+		execute "tabnew | term cargo run"
+	elseif &filetype == "typescript"
+		execute "tabnew | term ts-node ".expand("%")
+	else
+		echom "un supported file type: ".&filetype
+	endif
+
+endfunction
+
+function QuickSOL()
+	if &filetype == "typescript"
+		execute "tabnew | term anchor run test -- ".expand("%:p")
 	else
 		echom "un supported file type: ".&filetype
 	endif
