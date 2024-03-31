@@ -6,8 +6,8 @@ vim.cmd [[packadd packer.nvim]]
 
 
 -- network issue: https://github.com/nvim-treesitter/nvim-treesitter/issues/3232
-require("nvim-treesitter.install").prefer_git = true
 
+require("nvim-treesitter.install").prefer_git = true
 require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'

@@ -1,5 +1,3 @@
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-
 " search case insensitive
 set noignorecase
 
@@ -544,3 +542,5 @@ nmap gn <Plug>(GitGutterNextHunk)
 nmap gm <Plug>(GitGutterPrevHunk)
 
 set mouse=
+
+hi IncSearch cterm=reverse ctermfg=173 ctermbg=9 gui=reverse guifg=#d19a66
