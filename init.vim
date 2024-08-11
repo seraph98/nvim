@@ -162,6 +162,9 @@ Plug 'buoto/gotests-vim'
 " thrift 语法高亮
 Plug 'solarnz/thrift.vim'
 
+Plug 'windwp/nvim-autopairs'
+
+
 call plug#end()
 
 
