@@ -405,24 +405,24 @@ function QuickBench()
 endfunction
 
 function QuickRun()
-	let file_name = expand('%:t')
-	if &filetype == "cpp"
-		execute "tabnew | term gcc ".file_name." -lstdc++ -o atemp.out && ./atemp.out && rm ./atemp.out"
-	elseif &filetype == "sh"
-		execute "tabnew | term ".expand("%:p")
-	elseif &filetype == "go"
-		execute  "tabnew | term go run -gcflags=all=-l -tags=prod ".expand("%:p:h")
-	elseif &filetype == "javascript"
-		execute  "tabnew | term node ".expand("%:p")
-	elseif &filetype == "python"
-		execute "tabnew | term python3 ".expand("%:p")
-	elseif &filetype == "rust"
-		execute "tabnew | term cargo run"
-	elseif &filetype == "typescript"
-		execute "tabnew | term ts-node ".expand("%")
-	else
-		echom "un supported file type: ".&filetype
-	endif
+    let file_name = expand('%:t')
+    if &filetype == "cpp"
+        execute "tabnew | term gcc ".file_name." -lstdc++ -o atemp.out && ./atemp.out && rm ./atemp.out"
+    elseif &filetype == "sh"
+        execute "tabnew | term ".expand("%:p")
+    elseif &filetype == "go"
+        execute  "tabnew | term go run -gcflags=all=-l -tags=prod ".expand("%:p:h")
+    elseif &filetype == "javascript"
+        execute  "tabnew | term node ".expand("%:p")
+    elseif &filetype == "python"
+        execute "tabnew | term python3 ".expand("%:p")
+    elseif &filetype == "rust"
+        execute "tabnew | term cargo run"
+    elseif &filetype == "typescript"
+        execute "tabnew | term ts-node ".expand("%")
+    else
+        echom "un supported file type: ".&filetype
+    endif
 
 endfunction
 
