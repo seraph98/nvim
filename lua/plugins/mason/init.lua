@@ -114,6 +114,19 @@ for _, lsp in ipairs(servers) do
 	}
 end
 
+lspconfig.html.setup {
+	on_attach = function(client, bufnr)
+		-- 使用 expand 函数获取文件名后缀
+		local file_extension = vim.fn.expand('%:e') -- 扩展名，例如 'ejs'
+		-- 根据文件后缀禁用格式化
+		if file_extension == "ejs" then
+			client.server_capabilities.documentFormattingProvider = false
+			print("Formatting is disabled for EJS files.")
+		end
+	end,
+	filetypes = { "html", "htm", "ejs" }, -- 适用的文件类型
+}
+
 -- luasnip setup
 local luasnip = require 'luasnip'
 
