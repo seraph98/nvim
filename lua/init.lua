@@ -4,6 +4,17 @@
 vim.cmd [[packadd packer.nvim]]
 --vim.api.nvim_set_keymap('n', '<leader>im', [[<cmd>lua require'telescope'.extensions.goimpl.goimpl{}<CR>]], { noremap = true, silent = true })
 
+-- 设置 EJS 文件类型
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = "*.ejs",
+	command = "setlocal filetype=html"
+})
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+	pattern = "*.ejs",
+	command = "setlocal filetype=html"
+})
+
 
 -- network issue: https://github.com/nvim-treesitter/nvim-treesitter/issues/3232
 

@@ -29,13 +29,10 @@ M.on_attach = function(client, bufnr)
 	buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 	buf_set_keymap('n', '<leader>k', '<cmd>lua toggle_document_highlight()<CR>', opts)
 
-	--[[
-	[vim.api.nvim_command('autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 100)')
-	]]
-	vim.api.nvim_command('au BufWritePre <buffer> lua vim.lsp.buf.formatting()')
+	vim.api.nvim_command('au BufWritePre <buffer> lua vim.lsp.buf.format()')
 	require("notify")(client.name .. "client has attched server successfully!")
 end
 
